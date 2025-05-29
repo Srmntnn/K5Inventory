@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAuthStore } from "@/store/AuthStore";
-import Logo from "../assets/logo.png"; // Adjust the path as necessary
+import Logo from "../assets/Logo.png"; // Adjust the path as necessary
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
