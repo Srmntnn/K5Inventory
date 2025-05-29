@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ThemeSwitcher from "./themeSwitcher";
 import { ArrowRight } from "lucide-react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.png"; // Adjust the path as necessary
+import Logo from "../assets/Logo.png"; // Adjust the path as necessary
 import { useAuthStore } from "@/store/AuthStore";
 import { useToast } from "@/hooks/use-toast";
 
