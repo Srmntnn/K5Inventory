@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import UserItemList from "@/components/UserItemList";
 
-function home() {
+function Home() {
   return (
     <>
       <div className="min-h-screen bg-background text-foreground">
@@ -16,4 +16,4 @@ function home() {
   );
 }
 
-export default home;
+export default Home;
