@@ -6,10 +6,10 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   verifyOTP: { type: String, default: '' },
-  verifyOtpExpiresAt: { type: Number, default: 0 },
+  verifyOtpExpiresAt: { type: Date, default: null },
   isVerified: { type: Boolean, default: false },
   resetOtp: { type: String, default: '' },
-  resetOtpExpiresAt: { type: Number, default: 0 },
+  resetOtpExpiresAt: { type: Date, default: null },
   role: { type: String, enum: ['admin', 'department'], default: 'department' },
   createdAt: {
     type: Date,

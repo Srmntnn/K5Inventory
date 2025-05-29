@@ -12,7 +12,7 @@ const locationSchema = new mongoose.Schema(
             ref: "User",
             type: mongoose.Schema.Types.ObjectId,
         },
-        name: { type: String, required: true },
+        locationName: { type: String, required: true },
         description: { type: String, required: true },
     },
     { timestamps: true }

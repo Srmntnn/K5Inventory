@@ -29,7 +29,7 @@ function AddLocation() {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/location/new`,
         {
-          name: name,
+          locationName: name, // <-- FIXED HERE
           description: description,
         },
         { withCredentials: true }
@@ -88,7 +88,7 @@ function AddLocation() {
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Address of the location"
+                  placeholder="Address of the location "
                 />
               </div>
 

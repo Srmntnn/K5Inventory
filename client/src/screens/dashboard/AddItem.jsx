@@ -44,13 +44,13 @@ const AddItem = () => {
   const [dateOfPurchase, setDateOfPurchase] = useState(null);
   const [user, setUser] = useState("normal user");
   const [quantity, setQuantity] = useState(1);
-  const [status, setStatus] = useState("good condition");
+  const [condition, setCondition] = useState("good");
   const [location, setLocation] = useState([]);
 
   const [manufacturers, setManufacturers] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  const {isLoading} = useAuthStore();
+  const { isLoading } = useAuthStore();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +70,7 @@ const AddItem = () => {
         console.log("Location Response:", locationRes.data);
 
         const manufacturersData = manufacturerRes.data.companies;
-        const locationsData = locationRes.data;
+        const locationsData = locationRes.data.locations;
 
         if (Array.isArray(manufacturersData)) {
           setManufacturers(manufacturersData);
@@ -108,7 +108,7 @@ const AddItem = () => {
         dateOfPurchase,
         user,
         quantity,
-        status,
+        condition,
         location,
       };
 
@@ -121,10 +121,23 @@ const AddItem = () => {
       );
 
       console.log("Item created:", response.data);
+
       toast({
         title: "Item Created!",
         description: "Item created successfully.",
       });
+
+      // ✅ Clear all input fields after success
+      setItemName("");
+      setDescription("");
+      setSerialNo("");
+      setManufacturer("");
+      setModel("");
+      setDateOfPurchase("");
+      setUser("");
+      setQuantity("");
+      setCondition("");
+      setLocation("");
     } catch (error) {
       console.error("Error creating item:", error);
       toast({
@@ -206,19 +219,17 @@ const AddItem = () => {
                     />
                   </div>
                   <div className="w-full flex flex-col gap-2">
-                    <Label>Status</Label>
-                    <Select value={status} onValueChange={setStatus}>
+                    <Label>Condition</Label>
+                    <Select value={condition} onValueChange={setCondition}>
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select Status" />
+                        <SelectValue placeholder="Select condition" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Status</SelectLabel>
-                          <SelectItem value="good condition">
-                            Good Condition
-                          </SelectItem>
+                          <SelectItem value="good">Good Condition</SelectItem>
                           <SelectItem value="damaged">Damaged</SelectItem>
-                          <SelectItem value="need repair">
+                          <SelectItem value="needs repair">
                             Needs Repair
                           </SelectItem>
                         </SelectGroup>
@@ -264,15 +275,18 @@ const AddItem = () => {
                     />
                   </div>
                 </div>
-                <div>
-                  <Label className="font-bold">Quantity</Label>
-                  <Input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    placeholder="Enter quantity"
-                  />
+                <div className="flex gap-2">
+                  <div className="flex flex-col gap-2 w-full">
+                    <Label className="font-bold">Quantity</Label>
+                    <Input
+                      type="number"
+                      value={quantity}
+                      onChange={(e) => setQuantity(e.target.value)}
+                      placeholder="Enter quantity"
+                    />
+                  </div>
                 </div>
+
                 <div className="flex flex-col gap-2">
                   <Label className="font-bold">Date of Purchase</Label>
                   <Popover>
@@ -318,7 +332,7 @@ const AddItem = () => {
                           {location.length > 0
                             ? locations
                                 .filter((loc) => location.includes(loc._id))
-                                .map((loc) => loc.name)
+                                .map((loc) => loc.locationName)
                                 .join(", ")
                             : "Select location(s)"}
                         </Button>
@@ -341,7 +355,7 @@ const AddItem = () => {
                                       : "opacity-0"
                                   )}
                                 />
-                                {loc.name}
+                                {loc.locationName}
                               </CommandItem>
                             ))}
                           </CommandGroup>
@@ -360,15 +374,13 @@ const AddItem = () => {
                 {isLoading ? (
                   <Loader className="w-6 h-6 animate-spin text-white mx-auto" />
                 ) : (
-                  "Add Brand"
+                  "Add Item"
                 )}
               </Button>
             </form>
           </div>
         </motion.div>
       </div>
-
-      
     </>
   );
 };

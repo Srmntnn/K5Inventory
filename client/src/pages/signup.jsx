@@ -56,12 +56,12 @@ function signup() {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-background transition-colors duration-300">
-      <div className="flex items-center justify-center bg-card transition-all duration-300 rounded-lg  max-w-[550px] w-full">
+      <div className="flex items-center justify-center  transition-all duration-300 rounded-lg  max-w-[550px] w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="sm:p-10 p-6  rounded-lg  w-full relative border-border border "
+          className="sm:p-10 p-6  rounded-lg bg-card  w-full relative border-border border "
         >
           <div className="text-primary text-center pt-6">
             <div className="absolute top-[-50px] left-1/2 transform -translate-x-1/2">
@@ -75,7 +75,7 @@ function signup() {
               Create an Account
             </h1>
             <p className="text-muted-foreground">
-              Enter your cridentials to create an account.
+              Enter your credentials to create an account.
             </p>
           </div>
           <div className="flex flex-col justify-center gap-2 max-w-[350px] w-full mx-auto">

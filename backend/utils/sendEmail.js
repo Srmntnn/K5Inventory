@@ -6,11 +6,11 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
-});
+});;
 
 const sendWelcomeEmail = async (toEmail, name) => {
   await transporter.sendMail({
-    from: process.env.EMAIL_USER,
+    from: process.env.SENDER_EMAIL, // Your sender email
     to: toEmail,
     subject: 'Welcome to Inventory System',
     html: `<h2>Hello ${name},</h2><p>Your account has been created successfully!</p>`

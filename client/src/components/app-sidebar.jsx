@@ -24,6 +24,8 @@ import {
   Plus,
   ChevronRight,
   Building2,
+  LocateFixedIcon,
+  MapPin,
 } from "lucide-react";
 
 import {
@@ -52,12 +54,13 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import { Link } from "react-router-dom";
 
 // Menu items.
 const menu = [
   {
     title: "Dashboard",
-    url: "/dashboard",
+    url: "/dashboard/home",
     icon: LayoutDashboard,
   },
   {
@@ -82,6 +85,10 @@ const itemMenu = [
         title: "Add Item",
         url: "add-item",
       },
+      {
+        title: "Borrow Requests",
+        url: "borrow-request",
+      },
     ],
   },
   {
@@ -97,9 +104,20 @@ const itemMenu = [
         title: "Add Brands",
         url: "add-brands",
       },
+    ],
+  },
+  {
+    title: "Location",
+    url: "#",
+    icon: MapPin,
+    items: [
       {
-        title: "Quantum",
-        url: "#",
+        title: "All Locations",
+        url: "locations",
+      },
+      {
+        title: "Add Location",
+        url: "add-locations",
       },
     ],
   },
@@ -151,7 +169,10 @@ export function AppSidebar(props) {
       <SidebarHeader>
         <div className="flex p-2 gap-2 items-center whitespace-nowrap">
           <div className="h-10 flex items-center justify-center">
+            <Link to="/dashboard/home">
             <img src={Logo} alt="Logo" className="w-10" />
+            
+            </Link>
           </div>
 
           {/* Hide this text when collapsed to icon mode */}
@@ -170,10 +191,10 @@ export function AppSidebar(props) {
               {menu.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -204,9 +225,9 @@ export function AppSidebar(props) {
                         {item.items?.map((subItem) => (
                           <SidebarMenuSubItem key={subItem.title}>
                             <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
+                              <Link to={subItem.url}>
                                 <span>{subItem.title}</span>
-                              </a>
+                              </Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

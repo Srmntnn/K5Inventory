@@ -12,6 +12,8 @@ const userRouter = require('./routes/userRoutes');
 const itemRouter = require('./routes/itemRoutes');
 const brandRouter = require('./routes/manufacturerRoutes');
 const locationRouter = require('./routes/locationRoutes');
+const borrowItemRouter = require('./routes/borrowItemRoutes')
+const analyticsRoutes = require('./routes/analyticsRoutes');
 
 mongoDB();
 
@@ -34,6 +36,8 @@ app.use('/api/user', userRouter);
 app.use('/api/item', itemRouter);
 app.use('/api/company', brandRouter);
 app.use('/api/location', locationRouter);
+app.use('/api/borrow', borrowItemRouter)
+app.use('/api/analytics', analyticsRoutes);
 
 app.get('/', (req, res) => res.send("uiahhaha"))
 

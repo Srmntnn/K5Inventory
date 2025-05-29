@@ -141,7 +141,11 @@ export default function UserList() {
   });
 
   return (
-    <div className="w-full p-5">
+    <div className="w-full p-6">
+      <h1 className="md:text-2xl text-xl font-bold bg-gradient-to-r from-[#3b82f6] to-[#ff3333] text-transparent bg-clip-text w-fit">
+        Users
+      </h1>
+
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."

@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,37 +24,43 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/store/AuthStore";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect } from "react";
+import { useAuthStore } from "@/store/AuthStore";
 
-export function NavUser({ user }) {
-  // Log the user and "use client" when this component is rendered
-  console.log("use client");
-  console.log(user);
+export function NavUser() {
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const refreshUser = useAuthStore((state) => state.refreshUser);
 
-  const navigate = useNavigate(); // Move this inside the component
-  const { logout } = useAuthStore();
+  const navigate = useNavigate();
   const { toast } = useToast();
+  const { isMobile } = useSidebar();
+
+  useEffect(() => {
+    refreshUser();
+  }, []);
+
+  if (!user) return null;
 
   const handleLogout = async () => {
-    await logout(); // Call the logout function from the store
+    await logout();
 
     toast({
       title: "Logged Out",
       description: "You have successfully logged out.",
-      variant: "default", // You can change the variant if needed
+      variant: "default",
     });
 
-    navigate("/login"); // Redirect the user to the login page after logging out
+    navigate("/login");
   };
-
-  const { isMobile } = useSidebar();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <DropdownMenu>
+        <DropdownMenu onOpenChange={(open) => open && refreshUser()}>
           <DropdownMenuTrigger asChild>
             <div className="relative rounded-md p-[1px] bg-gradient-to-r from-blue-500 via-red-500 to-yellow-500">
               <SidebarMenuButton
@@ -68,7 +73,7 @@ export function NavUser({ user }) {
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-muted-foreground text-xs">{user.email}</span>
                 </div>
                 <ChevronsUpDown className="ml-auto size-4" />
               </SidebarMenuButton>
@@ -84,11 +89,11 @@ export function NavUser({ user }) {
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">K5</AvatarFallback>
+                  <AvatarFallback className="rounded-lg text-sans">K5</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-muted-foreground font-normal text-xs">{user.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -96,24 +101,24 @@ export function NavUser({ user }) {
             <DropdownMenuGroup>
               {user.isVerified ? (
                 <DropdownMenuItem>
-                  <BadgeCheck />
+                  <BadgeCheck className="mr-2 h-4 w-4 text-green-500" />
                   Verified
                 </DropdownMenuItem>
               ) : (
                 <DropdownMenuItem>
-                  <Sparkles />
-                  <a href="/verify">Verify Account</a>
+                  <Sparkles className="mr-2 h-4 w-4 text-yellow-500" />
+                  <a href="/verify-email">Verify Account</a>
                 </DropdownMenuItem>
               )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem className="text-accent hover:text-accent">
-                <CreditCard />
+                <CreditCard className="mr-2 h-4 w-4" />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem className="text-accent hover:text-accent">
-                <Bell />
+                <Bell className="mr-2 h-4 w-4" />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -122,7 +127,7 @@ export function NavUser({ user }) {
               className="cursor-pointer bg-destructive text-white"
               onClick={handleLogout}
             >
-              <LogOut />
+              <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>

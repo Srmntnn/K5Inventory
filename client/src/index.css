@@ -1,15 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @layer base {
+  html {
+    transition-property: background-color, color;
+    transition-duration: 100ms;
+    transition-timing-function: ease;
+  }
+} */
 
 @layer base {
   :root {
     --background: #ffffff;
     --foreground: #1a1a1a;
     --card: #ffffff;
-    --card-foreground: #262626;
+    --card-foreground: #1a1a1a;
     --popover: #ffffff;
     --popover-foreground: #1a1a1a;
     --primary: #3b82f6;
@@ -21,14 +29,15 @@
     --accent: #e6e6e6;
     --accent-foreground: #262626;
     --destructive: #ff3333;
+    --success: #22c55e;
     --destructive-foreground: #ffffff;
-    --border: #d9d9d9;
+    --border: #c8cfda;
     --input: #ffffff;
     --ring: #3b82f6;
     --radius: 0.5rem;
     --gradient-text: linear-gradient(to right, #3b82f6, #ff3333);
     --gradient-bg: linear-gradient(to bottom, #3b82f6, #ff3333);
-    --gradient: linear-gradient(to top left,#FC354C,#0ABFBC);
+    --gradient: linear-gradient(to top left, #fc354c, #0abfbc);
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -39,9 +48,9 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: #17191C;
-    --foreground: #e6e6e6;
-    --card: #1A1A1A;
+    --background: #0e0f11;
+    --foreground: #ffffff;
+    --card: #0c0d0e;
     --card-foreground: #e6e6e6;
     --popover: #0d0d0d;
     --popover-foreground: #e6e6e6;
@@ -54,9 +63,10 @@
     --accent: #262626;
     --accent-foreground: #e6e6e6;
     --destructive: #991f1f;
+    --success: #22c55e;
     --destructive-foreground: #e6e6e6;
-    --border: #667A99;
-    --input: #17191C;
+    --border: #252c37;
+    --input: #17191c;
     --ring: #3b82f6;
     --radius: 0.5rem;
     --gradient-text: linear-gradient(to right, #3b82f6, #ff3333);
@@ -87,8 +97,6 @@ input[type="text"]:not(:placeholder-shown) ~ .input-text {
   @apply text-blue-500 transform -translate-y-[16px] -translate-x-[9px] scale-75;
 }
 
-
-
 @layer base {
   * {
     @apply border-border;
@@ -97,4 +105,3 @@ input[type="text"]:not(:placeholder-shown) ~ .input-text {
     @apply bg-background text-foreground;
   }
 }
-

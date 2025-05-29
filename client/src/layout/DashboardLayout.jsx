@@ -50,7 +50,7 @@ function DashboardLayout() {
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink asChild>
-                    <Link to="/dashboard">Home</Link>
+                    <Link to="/dashboard/home">Home</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
 

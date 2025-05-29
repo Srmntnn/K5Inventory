@@ -18,7 +18,7 @@ function login() {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard/home");
     }
   }, [navigate, user]);
 
@@ -40,7 +40,7 @@ function login() {
       await login(email, password);
       toast({
         title: "Login Successful",
-        description: "Welcome back!",
+        description: `Welcome back!`,
       });
     } catch (err) {
       toast({
@@ -52,13 +52,13 @@ function login() {
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-background transition-colors duration-300">
-      <div className="flex items-center justify-center bg-card transition-all duration-300 rounded-lg  max-w-[550px] w-full">
+      <div className="flex items-center justify-center transition-all duration-300 rounded-lg  max-w-[550px] w-full">
         {/* <img src={Logo} alt="" className="bg-gradient-to-br from-[#3b82f6] to-[#ff3333] max-w-[500px] w-full" /> */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="sm:p-10 p-6 border rounded-lg border-border w-full relative"
+          className="sm:px-10 py-10 px-6 md:border bg-card rounded-lg w-full relative"
         >
           <div className="text-primary text-center pt-6">
             <div className="absolute top-[-50px] left-1/2 transform -translate-x-1/2">
@@ -68,11 +68,11 @@ function login() {
                 className="bg-gradient-to-br from-[#3b82f6] to-[#ff3333] h-24 rounded-full shadow-md border-2 border-border "
               />
             </div>
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="md:text-3xl text-2xl   font-bold text-foreground">
               Welcome Back, Ka-K5
             </h1>
             <p className="text-muted-foreground">
-              Enter your cridentials to login.
+              Enter your credentials to login.
             </p>
           </div>
           <div className="flex flex-col justify-center gap-2 max-w-[350px] w-full mx-auto">
@@ -107,11 +107,11 @@ function login() {
                   </label>
                 </div>
                 <div className="flex flex-col justify-center items-start relative h-6">
-                  {error && (
+                  {/* {error && (
                     <p className="text-destructive font-semibold flex text-sm text-start justify-content-center items-start">
                       {error}
                     </p>
-                  )}
+                  )} */}
                 </div>
                 {/* <div className="w-full">
                   <Label className="font-sans">Email</Label>
@@ -120,9 +120,11 @@ function login() {
               </div>
               <div className="mt-2">
                 <div>
-                  <h1 className="text-primary text-sm pl-3 ">
-                    Forgot Password?
-                  </h1>
+                  <Link to="/forgot-password">
+                    <h1 className="text-primary text-sm pl-3 ">
+                      Forgot Password?
+                    </h1>
+                  </Link>
                 </div>
                 <Button
                   className="mt-2 bg-gradient-to-r from-[#3b82f6] to-[#ff3333] outline-none border-none shadow-md w-full text-white transition duration-200"
