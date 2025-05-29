@@ -4,7 +4,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import ResetPassword from "./pages/resetPassword";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import DashboardLayout from "./layout/DashboardLayout";
 import User from "./screens/dashboard/User";
 
