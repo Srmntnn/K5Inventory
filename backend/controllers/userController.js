@@ -5,24 +5,6 @@ const { sendWelcomeEmail } = require('../utils/sendEmail');
 const transporter = require('../database/nodemailer');
 const { text } = require('express');
 
-// const signup = async (req, res) => {
-//   try {
-//     const { name, email, password, role } = req.body;
-
-//     const existing = await User.findOne({ email });
-//     if (existing) return res.status(400).json({ message: 'Email already exists' });
-
-//     const hashed = await bcrypt.hash(password, 10);
-//     const newUser = await User.create({ name, email, password: hashed, role });
-
-//     await sendWelcomeEmail(email, name);
-
-//     res.status(201).json({ message: 'User created' });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
-
 const signup = async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -62,8 +44,8 @@ const signup = async (req, res) => {
 
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+      secure: true,               // Must be true on deployed HTTPS
+      sameSite: 'none',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -114,8 +96,8 @@ const login = async (req, res) => {
 
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+      secure: true,               // Must be true on deployed HTTPS
+      sameSite: 'none',
       maxAge: 7 * 24 * 60 * 60 * 1000, // fixed duration
     });
 
@@ -132,40 +114,6 @@ const login = async (req, res) => {
   }
 };
 
-// const login = async (req, res) => {
-
-//   const { email, password } = req.body;
-
-//   if (!email || !password) {
-//     return res.json({ success: false, messagë: 'Email and Password are required' })
-//   }
-
-//   try {
-//     const user = await User.findOne({ email })
-
-//     if (!user) {
-//       return res.json({ success: false, messagë: 'Invalid email' })
-//     }
-
-//     const isMatch = await bcrypt.compare(password, user.password)
-//     if (!isMatch) {
-//       return res.json({ success: false, messagë: 'Invalid password' })
-//     }
-
-//     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
-//     res.cookie('token', token, {
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV === 'production',
-//       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-//       maxAge: 7 * 24 * 160 * 60 * 1000
-//     })
-
-//     return res.json({ success: true })
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 const logout = async (req, res) => {
   try {
     res.clearCookie('token', {
@@ -179,22 +127,6 @@ const logout = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
-
-// const login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({ email });
-//     if (!user) return res.status(404).json({ message: 'User not found' });
-
-//     const match = await bcrypt.compare(password, user.password);
-//     if (!match) return res.status(401).json({ message: 'Incorrect password' });
-
-
-
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 
 const sendVerifyOTP = async (req, res) => {
   const { userId } = req.body;
