@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/Logo.png"; // Adjust the path as necessary
 import Logo from "../assets/Logo.png";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";

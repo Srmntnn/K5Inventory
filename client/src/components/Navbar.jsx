@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ThemeSwitcher from "./themeSwitcher";
-import { ArrowRight } from "lucide-react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import Logo from "../assets/Logo.png"; // Adjust the path as necessary
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 import { useAuthStore } from "@/store/AuthStore";
