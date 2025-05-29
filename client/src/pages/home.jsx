@@ -1,6 +1,6 @@
 import ThemeSwitcher from "@/components/themeSwitcher";
 import React from "react";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import UserItemList from "@/components/UserItemList";
 
 function home() {
